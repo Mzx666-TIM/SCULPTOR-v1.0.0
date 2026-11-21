@@ -1,0 +1,324 @@
+{
+  "sample_count": 17149,
+  "feature_count": 22,
+  "folds": 5,
+  "random_state": 16,
+  "peak_memory_mb": null,
+  "reference": {
+    "density_g_cm3": 0.962674,
+    "heating_value_mj_kg": 42.082709,
+    "melting_point_k": 230.126
+  },
+  "ranking_rule": "0.45 * mean relative MAE gain + 0.35 * beat-count accuracy + 0.20 * Tier 1 precision",
+  "models": [
+    {
+      "model_family": "hist_gradient_boosting_deep",
+      "fit_seconds": 15.41,
+      "predict_seconds": 0.1,
+      "properties": {
+        "margin_density": {
+          "test_mae": 0.004637549130890035,
+          "baseline_mae_no_change": 0.009267318269286838,
+          "relative_gain": 0.49958024574816773,
+          "sign_agreement": 0.6438276284331448
+        },
+        "margin_heating_value": {
+          "test_mae": 0.043376616136165246,
+          "baseline_mae_no_change": 0.09228288419149802,
+          "relative_gain": 0.5299603332059541,
+          "sign_agreement": 0.6992827570120707
+        },
+        "margin_melting_point": {
+          "test_mae": 7.236106837204046,
+          "baseline_mae_no_change": 9.650515551519039,
+          "relative_gain": 0.2501844281194856,
+          "sign_agreement": 0.6707679748090267
+        }
+      },
+      "beat_exact_accuracy": 0.9479853052656132,
+      "beats_mae": 0.054055630065893055,
+      "tier1_precision": 0.46,
+      "tier1_recall": 0.39316239316239315,
+      "predicted_tier1_rows": 100,
+      "actual_tier1_rows": 117,
+      "mean_relative_gain": 0.42657500235786916,
+      "mean_sign_agreement": 0.6712927867514141,
+      "rank_score": 0.6157536079040057
+    },
+    {
+      "model_family": "hist_gradient_boosting",
+      "fit_seconds": 11.66,
+      "predict_seconds": 0.08,
+      "properties": {
+        "margin_density": {
+          "test_mae": 0.004707799619338296,
+          "baseline_mae_no_change": 0.009267318269286838,
+          "relative_gain": 0.49199979081968204,
+          "sign_agreement": 0.6409703189690361
+        },
+        "margin_heating_value": {
+          "test_mae": 0.04361749565354468,
+          "baseline_mae_no_change": 0.09228288419149802,
+          "relative_gain": 0.5273501035898145,
+          "sign_agreement": 0.6989911948218555
+        },
+        "margin_melting_point": {
+          "test_mae": 7.250232077534059,
+          "baseline_mae_no_change": 9.650515551519039,
+          "relative_gain": 0.24872075084187228,
+          "sign_agreement": 0.669310163857951
+        }
+      },
+      "beat_exact_accuracy": 0.947752055513441,
+      "beats_mae": 0.05458044200828037,
+      "tier1_precision": 0.42990654205607476,
+      "tier1_recall": 0.39316239316239315,
+      "predicted_tier1_rows": 107,
+      "actual_tier1_rows": 117,
+      "mean_relative_gain": 0.4226902150837896,
+      "mean_sign_agreement": 0.6697572258829475,
+      "rank_score": 0.6079051246286247
+    },
+    {
+      "model_family": "extra_trees",
+      "fit_seconds": 32.07,
+      "predict_seconds": 0.94,
+      "properties": {
+        "margin_density": {
+          "test_mae": 0.004670109670363954,
+          "baseline_mae_no_change": 0.009267318269286838,
+          "relative_gain": 0.4960667655235995,
+          "sign_agreement": 0.6390460085136159
+        },
+        "margin_heating_value": {
+          "test_mae": 0.044265337134496416,
+          "baseline_mae_no_change": 0.09228288419149802,
+          "relative_gain": 0.5203299341767369,
+          "sign_agreement": 0.6918770773806053
+        },
+        "margin_melting_point": {
+          "test_mae": 7.405979276850457,
+          "baseline_mae_no_change": 9.650515551519039,
+          "relative_gain": 0.23258200690793984,
+          "sign_agreement": 0.6704764126188116
+        }
+      },
+      "beat_exact_accuracy": 0.9461776196862791,
+      "beats_mae": 0.056213190273485335,
+      "tier1_precision": 0.4375,
+      "tier1_recall": 0.4188034188034188,
+      "predicted_tier1_rows": 112,
+      "actual_tier1_rows": 117,
+      "mean_relative_gain": 0.4163262355360921,
+      "mean_sign_agreement": 0.6671331661710109,
+      "rank_score": 0.6060089728814392
+    },
+    {
+      "model_family": "random_forest",
+      "fit_seconds": 61.6,
+      "predict_seconds": 0.92,
+      "properties": {
+        "margin_density": {
+          "test_mae": 0.0045869281806897,
+          "baseline_mae_no_change": 0.009267318269286838,
+          "relative_gain": 0.505042554123623,
+          "sign_agreement": 0.6419033179777246
+        },
+        "margin_heating_value": {
+          "test_mae": 0.04389799829123271,
+          "baseline_mae_no_change": 0.09228288419149802,
+          "relative_gain": 0.5243105081096174,
+          "sign_agreement": 0.6917604525045192
+        },
+        "margin_melting_point": {
+          "test_mae": 7.287839984808044,
+          "baseline_mae_no_change": 9.650515551519039,
+          "relative_gain": 0.24482376657473992,
+          "sign_agreement": 0.674558283281824
+        }
+      },
+      "beat_exact_accuracy": 0.9467024316286664,
+      "beats_mae": 0.05563006589305499,
+      "tier1_precision": 0.41228070175438597,
+      "tier1_recall": 0.4017094017094017,
+      "predicted_tier1_rows": 114,
+      "actual_tier1_rows": 117,
+      "mean_relative_gain": 0.4247256096026601,
+      "mean_sign_agreement": 0.6694073512546893,
+      "rank_score": 0.6049285157421075
+    },
+    {
+      "model_family": "gradient_boosting",
+      "fit_seconds": 54.81,
+      "predict_seconds": 0.07,
+      "properties": {
+        "margin_density": {
+          "test_mae": 0.004722821433676527,
+          "baseline_mae_no_change": 0.009267318269286838,
+          "relative_gain": 0.4903788456981558,
+          "sign_agreement": 0.6353723249169048
+        },
+        "margin_heating_value": {
+          "test_mae": 0.044745846194576375,
+          "baseline_mae_no_change": 0.09228288419149802,
+          "relative_gain": 0.5151230199771022,
+          "sign_agreement": 0.6873870196512917
+        },
+        "margin_melting_point": {
+          "test_mae": 7.452183840853336,
+          "baseline_mae_no_change": 9.650515551519039,
+          "relative_gain": 0.2277942249748175,
+          "sign_agreement": 0.6636538573677766
+        }
+      },
+      "beat_exact_accuracy": 0.9478103679514841,
+      "beats_mae": 0.05493031663653857,
+      "tier1_precision": 0.4298245614035088,
+      "tier1_recall": 0.4188034188034188,
+      "predicted_tier1_rows": 114,
+      "actual_tier1_rows": 117,
+      "mean_relative_gain": 0.4110986968833585,
+      "mean_sign_agreement": 0.6621377339786577,
+      "rank_score": 0.6026929546612325
+    },
+    {
+      "model_family": "ridge",
+      "fit_seconds": 0.27,
+      "predict_seconds": 0.02,
+      "properties": {
+        "margin_density": {
+          "test_mae": 0.005754115778494915,
+          "baseline_mae_no_change": 0.009267318269286838,
+          "relative_gain": 0.3790959141260053,
+          "sign_agreement": 0.6141465974692402
+        },
+        "margin_heating_value": {
+          "test_mae": 0.04689427468870666,
+          "baseline_mae_no_change": 0.09228288419149802,
+          "relative_gain": 0.49184212110887826,
+          "sign_agreement": 0.6945594495305849
+        },
+        "margin_melting_point": {
+          "test_mae": 8.133632965221082,
+          "baseline_mae_no_change": 9.650515551519039,
+          "relative_gain": 0.15718150788940932,
+          "sign_agreement": 0.656014927984139
+        }
+      },
+      "beat_exact_accuracy": 0.9433203102221704,
+      "beats_mae": 0.059362061927809205,
+      "tier1_precision": 0.45161290322580644,
+      "tier1_recall": 0.358974358974359,
+      "predicted_tier1_rows": 93,
+      "actual_tier1_rows": 117,
+      "mean_relative_gain": 0.3427065143747643,
+      "mean_sign_agreement": 0.6549069916613214,
+      "rank_score": 0.5747026206915649
+    },
+    {
+      "model_family": "knn",
+      "fit_seconds": 0.25,
+      "predict_seconds": 0.45,
+      "properties": {
+        "margin_density": {
+          "test_mae": 0.005174041070066982,
+          "baseline_mae_no_change": 0.009267318269286838,
+          "relative_gain": 0.4416895028614197,
+          "sign_agreement": 0.6031255466791067
+        },
+        "margin_heating_value": {
+          "test_mae": 0.04913319937371484,
+          "baseline_mae_no_change": 0.09228288419149802,
+          "relative_gain": 0.4675805832882556,
+          "sign_agreement": 0.6748498454720392
+        },
+        "margin_melting_point": {
+          "test_mae": 7.77928975528789,
+          "baseline_mae_no_change": 9.650515551519039,
+          "relative_gain": 0.19389904987372497,
+          "sign_agreement": 0.6598635488949793
+        }
+      },
+      "beat_exact_accuracy": 0.9419208117091376,
+      "beats_mae": 0.06058662312671293,
+      "tier1_precision": 0.37755102040816324,
+      "tier1_recall": 0.3162393162393162,
+      "predicted_tier1_rows": 98,
+      "actual_tier1_rows": 117,
+      "mean_relative_gain": 0.3677230453411335,
+      "mean_sign_agreement": 0.6459463136820417,
+      "rank_score": 0.5706578585833408
+    },
+    {
+      "model_family": "mlp",
+      "fit_seconds": 357.85,
+      "predict_seconds": 0.07,
+      "properties": {
+        "margin_density": {
+          "test_mae": 0.011650529419015883,
+          "baseline_mae_no_change": 0.009267318269286838,
+          "relative_gain": -0.2571629764381065,
+          "sign_agreement": 0.585281940637938
+        },
+        "margin_heating_value": {
+          "test_mae": 0.054596658936831355,
+          "baseline_mae_no_change": 0.09228288419149802,
+          "relative_gain": 0.40837719350495416,
+          "sign_agreement": 0.689719517173013
+        },
+        "margin_melting_point": {
+          "test_mae": 7.843870279077598,
+          "baseline_mae_no_change": 9.650515551519039,
+          "relative_gain": 0.18720712513199,
+          "sign_agreement": 0.6654032305090676
+        }
+      },
+      "beat_exact_accuracy": 0.9348066942678873,
+      "beats_mae": 0.07090792466033005,
+      "tier1_precision": 0.3,
+      "tier1_recall": 0.28205128205128205,
+      "predicted_tier1_rows": 110,
+      "actual_tier1_rows": 117,
+      "mean_relative_gain": 0.11280711406627923,
+      "mean_sign_agreement": 0.6468015627733396,
+      "rank_score": 0.4379455443235862
+    }
+  ],
+  "candidate_model_paths": {
+    "hist_gradient_boosting_deep": "<SCULPTOR_ROOT>\Evaluation_Iteration\\evaluation\\model\\perturbation_iteration\\candidates\\hist_gradient_boosting_deep.joblib",
+    "hist_gradient_boosting": "<SCULPTOR_ROOT>\Evaluation_Iteration\\evaluation\\model\\perturbation_iteration\\candidates\\hist_gradient_boosting.joblib",
+    "extra_trees": "<SCULPTOR_ROOT>\Evaluation_Iteration\\evaluation\\model\\perturbation_iteration\\candidates\\extra_trees.joblib",
+    "random_forest": "<SCULPTOR_ROOT>\Evaluation_Iteration\\evaluation\\model\\perturbation_iteration\\candidates\\random_forest.joblib",
+    "gradient_boosting": "<SCULPTOR_ROOT>\Evaluation_Iteration\\evaluation\\model\\perturbation_iteration\\candidates\\gradient_boosting.joblib",
+    "ridge": "<SCULPTOR_ROOT>\Evaluation_Iteration\\evaluation\\model\\perturbation_iteration\\candidates\\ridge.joblib",
+    "knn": "<SCULPTOR_ROOT>\Evaluation_Iteration\\evaluation\\model\\perturbation_iteration\\candidates\\knn.joblib",
+    "mlp": "<SCULPTOR_ROOT>\Evaluation_Iteration\\evaluation\\model\\perturbation_iteration\\candidates\\mlp.joblib"
+  },
+  "production_model_path": "<SCULPTOR_ROOT>\Evaluation_Iteration\\evaluation\\model\\perturbation_iteration\\perturbation_delta_iteration.joblib",
+  "top": [
+    {
+      "model_family": "hist_gradient_boosting_deep",
+      "rank_score": 0.6157536079040057,
+      "mean_relative_gain": 0.42657500235786916,
+      "beat_exact_accuracy": 0.9479853052656132,
+      "tier1_precision": 0.46,
+      "path": "<SCULPTOR_ROOT>\Evaluation_Iteration\\evaluation\\model\\perturbation_iteration\\candidates\\hist_gradient_boosting_deep.joblib"
+    },
+    {
+      "model_family": "hist_gradient_boosting",
+      "rank_score": 0.6079051246286247,
+      "mean_relative_gain": 0.4226902150837896,
+      "beat_exact_accuracy": 0.947752055513441,
+      "tier1_precision": 0.42990654205607476,
+      "path": "<SCULPTOR_ROOT>\Evaluation_Iteration\\evaluation\\model\\perturbation_iteration\\candidates\\hist_gradient_boosting.joblib"
+    },
+    {
+      "model_family": "extra_trees",
+      "rank_score": 0.6060089728814392,
+      "mean_relative_gain": 0.4163262355360921,
+      "beat_exact_accuracy": 0.9461776196862791,
+      "tier1_precision": 0.4375,
+      "path": "<SCULPTOR_ROOT>\Evaluation_Iteration\\evaluation\\model\\perturbation_iteration\\candidates\\extra_trees.joblib"
+    }
+  ]
+}

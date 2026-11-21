@@ -1,0 +1,31 @@
+# Virtual environments are rebuilt with setup_env.ps1, never committed.
+.venv/
+venv/
+
+# The interpreter that setup_env.ps1 provisions (runtime\python311, the
+# cached download and the version record) is machine-local too.
+runtime/
+
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local scratch
+*.log
+*.err
+
+# Run outputs: the shipped trial runs under result/ are tracked on purpose,
+# but per-machine control-panel job logs are not.
+result/control_panel_jobs/
+
+# ------------------------------------------------------------------
+# Large artifacts are distributed as release assets / Zenodo, not in git.
+dataset/
+result/
+*.joblib
+*.pkl
+*.h5
+*.pt.tmp
+Thumbs.db
+.DS_Store

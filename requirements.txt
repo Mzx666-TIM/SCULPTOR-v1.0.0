@@ -1,0 +1,26 @@
+rdkit
+torch-geometric
+pandas
+# The paper's numbers were produced with numpy 1.26; pin the major version so a
+# fresh install cannot silently change the numerics.
+numpy<2
+scikit-learn
+xgboost
+openpyxl
+joblib
+h5py
+scipy
+e3nn
+psutil
+# Control panel, native window only.  The browser mode (start_sculptor.bat web)
+# uses the Python standard library and needs none of these, so a machine that
+# cannot install them still runs the full pipeline.
+# The pywebview runtime dependencies are listed explicitly: if a mirror serves a
+# wheel whose metadata is incomplete, the panel would otherwise fail at start up
+# with "No module named ..." long after this install reported success.
+pywebview
+proxy_tools
+bottle
+typing_extensions
+pythonnet; sys_platform == "win32"
+clr_loader; sys_platform == "win32"

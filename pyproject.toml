@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "symmetric-fuel-design"
+version = "1.0.0"
+description = "Symmetry-constrained fuel molecule design toolkit"
+requires-python = ">=3.10"
+authors = [{ name = "Zongxiang Meng" }, { name = "Haisheng Ren" }]
+dependencies = []
+
+[project.optional-dependencies]
+chem = ["rdkit"]
+ml = ["torch", "torch-geometric", "numpy"]
+property = ["e3nn"]
+external-property = ["scikit-learn", "xgboost", "openpyxl", "joblib"]
+data = ["pandas", "h5py"]
+ui = ["pywebview", "psutil"]
+dev = ["pytest"]
+
+[project.scripts]
+fuel-design = "fuel_design.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]

@@ -1,0 +1,57 @@
+{
+  "model_path": "F:\\fuel_design\\SCULPTOR\\Evaluation_Iteration\\evaluation\\model\\perturbation_iteration\\perturbation_delta_iteration.joblib",
+  "sample_count": 14053,
+  "feature_count": 23,
+  "dropped_features": [],
+  "metrics": {
+    "delta_margin_density": {
+      "samples_used": "all_samples",
+      "test_mae": 0.00620966762092202,
+      "baseline_mae_no_change": 0.011563712913553894,
+      "test_sign_agreement": 0.6609747420846673,
+      "train_rows": 11242,
+      "test_rows": 2811
+    },
+    "delta_margin_heating_value": {
+      "samples_used": "all_samples",
+      "test_mae": 0.04303434756922987,
+      "baseline_mae_no_change": 0.09511136535040915,
+      "test_sign_agreement": 0.7036641764496621,
+      "train_rows": 11242,
+      "test_rows": 2811
+    },
+    "delta_margin_melting_point": {
+      "samples_used": "all_samples",
+      "test_mae": 7.0486350141194105,
+      "baseline_mae_no_change": 10.137072674848808,
+      "test_sign_agreement": 0.6755602988260405,
+      "train_rows": 11242,
+      "test_rows": 2811
+    }
+  },
+  "jp10_reference": {
+    "density_g_cm3": 0.962674,
+    "heating_value_mj_kg": 42.082709,
+    "melting_point_k": 230.126
+  },
+  "operator_weights": {
+    "bond_rewire": 0.06285244465776203,
+    "ch2_bridge_move": 0.06667641225663938,
+    "local_skeleton_rearrange": 0.0643351758298311,
+    "methyl_shift": 0.06906080198834054,
+    "methylation": 0.06334457949868821,
+    "ring_adjust": 0.054894538692621064,
+    "ring_expand": 0.6188360470761177
+  },
+  "operator_ring_gain": {
+    "bond_rewire": -0.18801734331888056,
+    "ch2_bridge_move": -0.05991639572689271,
+    "local_skeleton_rearrange": -0.13801452784503632,
+    "methyl_shift": 0.0,
+    "methylation": 0.0,
+    "ring_adjust": -0.4973730297723292,
+    "ring_expand": 3.3458301453710786
+  },
+  "feature_schema_version": "perturbation_delta_v1",
+  "ring_count_definition": "formula_cycle_rank_full_molecule_v1"
+}

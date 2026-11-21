@@ -1,0 +1,5 @@
+# Extra packages needed to run the bundled test suite (tests/).
+# Install after the runtime environment is in place:
+#   .\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+#   .\.venv\Scripts\python.exe -m pytest tests -q
+pytest

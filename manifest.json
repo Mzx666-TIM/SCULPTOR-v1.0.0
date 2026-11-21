@@ -1,0 +1,407 @@
+{
+  "generated_at": "2026-09-24 18:22:29",
+  "note": "Melt/boil/flash heads are the MLP ensembles (phase_fusion_gdb820k_mlp_ens2d / _ens3d). The earlier ExtraTrees tree heads and the one-off scripts they needed were retired on 2026-09-22 and live in <ARCHIVE_ROOT>; they are not part of the runtime layout. The external thermodynamic calculator (TDOC) was removed on 2026-09-24.",
+  "layout": {
+    "root": "SCULPTOR/",
+    "note": "SCULPTOR contains only what the full workflow needs at runtime (CLI, control panel, pipeline code, models, runtime data). External datasets, historical results, paper materials, training data and one-off scripts are archived in <ARCHIVE_ROOT> (mirrored layout).",
+    "entry_package": "SCULPTOR/fuel_design/",
+    "path_registry": "SCULPTOR/fuel_design/paths.py",
+    "dataset": "archived at addition/SCULPTOR/dataset (external raw data, not used at runtime)",
+    "result": "archived at addition/result (historical run outputs); new runs recreate SCULPTOR/result",
+    "Generation": [
+      "skeleton_enumeration",
+      "sym_molecule_generation",
+      "bond_completion_1",
+      "bond_completion_2",
+      "screening",
+      "routing"
+    ],
+    "Perturbation": [
+      "Preparation",
+      "perturbation_generation",
+      "perturbation_operator"
+    ],
+    "Evaluation_Iteration": [
+      "evaluation",
+      "rescoring",
+      "known_fuel_matching",
+      "feedback_iteration_loop",
+      "CBH-BDC",
+      "SFS-VR"
+    ]
+  },
+  "models": [
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/e3nn/e3nn_geometry_scorer_g_new.pt",
+      "mb": 0.1,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/perturbation_iteration/candidates/extra_trees.joblib",
+      "mb": 817.7,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/perturbation_iteration/candidates/gradient_boosting.joblib",
+      "mb": 1.1,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/perturbation_iteration/candidates/hist_gradient_boosting.joblib",
+      "mb": 1.7,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/perturbation_iteration/candidates/hist_gradient_boosting_deep.joblib",
+      "mb": 3.0,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/perturbation_iteration/candidates/knn.joblib",
+      "mb": 6.5,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/perturbation_iteration/candidates/mlp.joblib",
+      "mb": 0.8,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/perturbation_iteration/candidates/random_forest.joblib",
+      "mb": 596.9,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/perturbation_iteration/candidates/ridge.joblib",
+      "mb": 0.0,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/perturbation_iteration/iteration_model_comparison.json",
+      "mb": 0.0,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/perturbation_iteration/perturbation_delta_iteration.joblib",
+      "mb": 1.8,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/perturbation_iteration/perturbation_delta_iteration.json",
+      "mb": 0.0,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/schema 2/phase_fusion_gdb820k_mlp_ens2d/boiling_point_k_fusion.joblib",
+      "mb": 3.2,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/schema 2/phase_fusion_gdb820k_mlp_ens2d/flash_point_k_fusion.joblib",
+      "mb": 3.2,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/schema 2/phase_fusion_gdb820k_mlp_ens2d/melting_point_k_fusion.joblib",
+      "mb": 3.2,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/schema 2/phase_fusion_gdb820k_mlp_ens2d/mlp_ens_record.json",
+      "mb": 0.0,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/schema 3/phase_fusion_gdb820k_mlp_ens3d/boiling_point_k_fusion.joblib",
+      "mb": 3.3,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/schema 3/phase_fusion_gdb820k_mlp_ens3d/flash_point_k_fusion.joblib",
+      "mb": 3.3,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/schema 3/phase_fusion_gdb820k_mlp_ens3d/melting_point_k_fusion.joblib",
+      "mb": 3.3,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/schema 3/phase_fusion_gdb820k_mlp_ens3d/mlp_ens_record.json",
+      "mb": 0.0,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/STA/sta_820k_v2/sta_gdb_boiling_point_paper.pt",
+      "mb": 144.4,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/STA/sta_820k_v2/sta_gdb_density_paper.pt",
+      "mb": 144.4,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/STA/sta_820k_v2/sta_gdb_flash_point_paper.pt",
+      "mb": 144.4,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/STA/sta_820k_v2/sta_gdb_formation_enthalpy_paper.pt",
+      "mb": 144.4,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/STA/sta_820k_v2/sta_gdb_melting_point_paper.pt",
+      "mb": 144.4,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/STA/sta_qm9_b3lyp_paper.pt",
+      "mb": 144.4,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/STA/sta_qm9_g4mp2_paper.pt",
+      "mb": 144.4,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/model/STA/sta_qm9_paper.pt",
+      "mb": 144.4,
+      "pipeline": "Evaluation_Iteration/evaluation/model"
+    }
+  ],
+  "code": [
+    {
+      "path": "SCULPTOR/core/code/__init__.py",
+      "pipeline": "core"
+    },
+    {
+      "path": "SCULPTOR/core/code/campaign_layout.py",
+      "pipeline": "core"
+    },
+    {
+      "path": "SCULPTOR/core/code/candidate_export.py",
+      "pipeline": "core"
+    },
+    {
+      "path": "SCULPTOR/core/code/canonical.py",
+      "pipeline": "core"
+    },
+    {
+      "path": "SCULPTOR/core/code/chemistry.py",
+      "pipeline": "core"
+    },
+    {
+      "path": "SCULPTOR/core/code/gdb.py",
+      "pipeline": "core"
+    },
+    {
+      "path": "SCULPTOR/core/code/geometry_analysis.py",
+      "pipeline": "core"
+    },
+    {
+      "path": "SCULPTOR/core/code/graph.py",
+      "pipeline": "core"
+    },
+    {
+      "path": "SCULPTOR/core/code/mirror_symmetry.py",
+      "pipeline": "core"
+    },
+    {
+      "path": "SCULPTOR/core/code/parallel.py",
+      "pipeline": "core"
+    },
+    {
+      "path": "SCULPTOR/core/code/preprocessing.py",
+      "pipeline": "core"
+    },
+    {
+      "path": "SCULPTOR/core/code/property_cache.py",
+      "pipeline": "core"
+    },
+    {
+      "path": "SCULPTOR/core/code/symmetry.py",
+      "pipeline": "core"
+    },
+    {
+      "path": "SCULPTOR/core/code/visualization.py",
+      "pipeline": "core"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/code/__init__.py",
+      "pipeline": "Evaluation_Iteration/evaluation"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/code/ani1x.py",
+      "pipeline": "Evaluation_Iteration/evaluation"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/code/evaluation.py",
+      "pipeline": "Evaluation_Iteration/evaluation"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/code/finalization.py",
+      "pipeline": "Evaluation_Iteration/evaluation"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/code/mlp_phase_head.py",
+      "pipeline": "Evaluation_Iteration/evaluation"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/code/phase_fusion.py",
+      "pipeline": "Evaluation_Iteration/evaluation"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/code/property_model/__init__.py",
+      "pipeline": "Evaluation_Iteration/evaluation"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/code/property_model/data.py",
+      "pipeline": "Evaluation_Iteration/evaluation"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/code/property_model/e3nn_geometry_scorer.py",
+      "pipeline": "Evaluation_Iteration/evaluation"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/code/property_model/e3nn_regressor.py",
+      "pipeline": "Evaluation_Iteration/evaluation"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/code/property_uncertainty.py",
+      "pipeline": "Evaluation_Iteration/evaluation"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/code/qm9.py",
+      "pipeline": "Evaluation_Iteration/evaluation"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/code/sta_model.py",
+      "pipeline": "Evaluation_Iteration/evaluation"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/code/thesis_property_tools.py",
+      "pipeline": "Evaluation_Iteration/evaluation"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/evaluation/code/threshold_calibration.py",
+      "pipeline": "Evaluation_Iteration/evaluation"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/feedback_iteration_loop/code/__init__.py",
+      "pipeline": "Evaluation_Iteration/feedback_iteration_loop"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/feedback_iteration_loop/code/sta_feedback.py",
+      "pipeline": "Evaluation_Iteration/feedback_iteration_loop"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/known_fuel_matching/code/__init__.py",
+      "pipeline": "Evaluation_Iteration/known_fuel_matching"
+    },
+    {
+      "path": "SCULPTOR/Evaluation_Iteration/known_fuel_matching/code/known_fuel_library.py",
+      "pipeline": "Evaluation_Iteration/known_fuel_matching"
+    },
+    {
+      "path": "SCULPTOR/Generation/bond_completion_2/code/__init__.py",
+      "pipeline": "Generation/bond_completion_2"
+    },
+    {
+      "path": "SCULPTOR/Generation/bond_completion_2/code/bond_model/__init__.py",
+      "pipeline": "Generation/bond_completion_2"
+    },
+    {
+      "path": "SCULPTOR/Generation/bond_completion_2/code/bond_model/dataset.py",
+      "pipeline": "Generation/bond_completion_2"
+    },
+    {
+      "path": "SCULPTOR/Generation/bond_completion_2/code/bond_model/model.py",
+      "pipeline": "Generation/bond_completion_2"
+    },
+    {
+      "path": "SCULPTOR/Generation/bond_completion_2/code/bond_model/predict.py",
+      "pipeline": "Generation/bond_completion_2"
+    },
+    {
+      "path": "SCULPTOR/Generation/bond_completion_2/code/bond_model/semi_base.py",
+      "pipeline": "Generation/bond_completion_2"
+    },
+    {
+      "path": "SCULPTOR/Generation/bond_completion_2/code/bond_model/train.py",
+      "pipeline": "Generation/bond_completion_2"
+    },
+    {
+      "path": "SCULPTOR/Generation/routing/code/__init__.py",
+      "pipeline": "Generation/routing"
+    },
+    {
+      "path": "SCULPTOR/Generation/routing/code/property_consensus.py",
+      "pipeline": "Generation/routing"
+    },
+    {
+      "path": "SCULPTOR/Generation/routing/code/property_screening.py",
+      "pipeline": "Generation/routing"
+    },
+    {
+      "path": "SCULPTOR/Generation/routing/code/tier_routing.py",
+      "pipeline": "Generation/routing"
+    },
+    {
+      "path": "SCULPTOR/Generation/screening/code/__init__.py",
+      "pipeline": "Generation/screening"
+    },
+    {
+      "path": "SCULPTOR/Generation/screening/code/extract_gdb17_symmetric_saturated.py",
+      "pipeline": "Generation/screening"
+    },
+    {
+      "path": "SCULPTOR/Generation/screening/code/novelty.py",
+      "pipeline": "Generation/screening"
+    },
+    {
+      "path": "SCULPTOR/Generation/screening/code/ring_analysis.py",
+      "pipeline": "Generation/screening"
+    },
+    {
+      "path": "SCULPTOR/Generation/screening/code/screening.py",
+      "pipeline": "Generation/screening"
+    },
+    {
+      "path": "SCULPTOR/Generation/sym_molecule_generation/code/__init__.py",
+      "pipeline": "Generation/sym_molecule_generation"
+    },
+    {
+      "path": "SCULPTOR/Generation/sym_molecule_generation/code/generator.py",
+      "pipeline": "Generation/sym_molecule_generation"
+    },
+    {
+      "path": "SCULPTOR/Generation/sym_molecule_generation/code/pipeline.py",
+      "pipeline": "Generation/sym_molecule_generation"
+    },
+    {
+      "path": "SCULPTOR/Generation/sym_molecule_generation/code/schedule.py",
+      "pipeline": "Generation/sym_molecule_generation"
+    },
+    {
+      "path": "SCULPTOR/Perturbation/perturbation_generation/__init__.py",
+      "pipeline": "Perturbation/perturbation_generation"
+    },
+    {
+      "path": "SCULPTOR/Perturbation/perturbation_generation/perturbation.py",
+      "pipeline": "Perturbation/perturbation_generation"
+    },
+    {
+      "path": "SCULPTOR/Perturbation/perturbation_generation/perturbation_iteration.py",
+      "pipeline": "Perturbation/perturbation_generation"
+    }
+  ],
+  "result_runs": [
+    "control_panel_jobs",
+    "e2e_final",
+    "prod_2026_09_24",
+    "test_result"
+  ]
+}

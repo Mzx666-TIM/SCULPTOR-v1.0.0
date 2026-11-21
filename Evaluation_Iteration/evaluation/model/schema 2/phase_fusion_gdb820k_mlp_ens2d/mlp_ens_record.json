@@ -1,0 +1,38 @@
+{
+  "melting_point_k": {
+    "path": "<SCULPTOR_ROOT>\Evaluation_Iteration\\evaluation\\model\\schema 2\\phase_fusion_gdb820k_mlp_ens2d\\melting_point_k_fusion.joblib",
+    "test_mae": 1.629102,
+    "test_rmse": 2.95983,
+    "test_r2": 0.981823,
+    "validation_rmse": 2.899215,
+    "conformal90_halfwidth": 3.9893,
+    "train_rows": 649611,
+    "validation_rows": 81201,
+    "test_rows": 81201,
+    "fit_seconds": 315.3
+  },
+  "boiling_point_k": {
+    "path": "<SCULPTOR_ROOT>\Evaluation_Iteration\\evaluation\\model\\schema 2\\phase_fusion_gdb820k_mlp_ens2d\\boiling_point_k_fusion.joblib",
+    "test_mae": 1.145706,
+    "test_rmse": 1.811357,
+    "test_r2": 0.997829,
+    "validation_rmse": 1.816126,
+    "conformal90_halfwidth": 2.8228,
+    "train_rows": 649616,
+    "validation_rows": 81202,
+    "test_rows": 81202,
+    "fit_seconds": 303.4
+  },
+  "flash_point_k": {
+    "path": "<SCULPTOR_ROOT>\Evaluation_Iteration\\evaluation\\model\\schema 2\\phase_fusion_gdb820k_mlp_ens2d\\flash_point_k_fusion.joblib",
+    "test_mae": 2.019441,
+    "test_rmse": 3.359833,
+    "test_r2": 0.992345,
+    "validation_rmse": 3.332128,
+    "conformal90_halfwidth": 4.8724,
+    "train_rows": 649604,
+    "validation_rows": 81200,
+    "test_rows": 81200,
+    "fit_seconds": 311.5
+  }
+}

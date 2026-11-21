@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fuel Molecule Design Control Panel</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>Fuel Molecule Design Control Panel</h1>
+        <p id="repoPath">Reading project path</p>
+      </div>
+      <div class="status-pill" id="serverStatus">Standby</div>
+    </header>
+
+    <main class="layout">
+      <section class="panel controls">
+        <div class="tabs" role="tablist" aria-label="Run mode">
+          <button class="tab active" data-mode="symmetric">Symmetric Generation</button>
+          <button class="tab" data-mode="perturbation">Perturbation</button>
+          <button class="tab" data-mode="rescore">Rescore</button>
+        </div>
+
+        <form id="configForm">
+          <section class="subsection objective-section">
+            <h2>Research Objective</h2>
+            <label>
+              Compute device
+              <select data-field="device_mode" id="deviceMode">
+                <option value="auto">auto - probe CUDA, else CPU</option>
+                <option value="cpu">cpu - never uses CUDA</option>
+                <option value="gpu">gpu - require CUDA</option>
+              </select>
+            </label>
+            <label>
+              Objective for this run
+              <select data-field="objective_mode" id="objectiveMode">
+                <option value="property_maximize">Property-guided (no targets)</option>
+                <option value="target_property">Target-property-guided: aim at target values</option>
+                <option value="novelty_exploration">Novelty exploration</option>
+              </select>
+            </label>
+            <div class="objective-panels">
+              <div class="objective-panel" data-objective-panel="property_maximize">
+                <strong>Property-guided</strong>
+              </div>
+              <div class="objective-panel" data-objective-panel="target_property" hidden>
+                <strong>Target-property-guided</strong>
+                <div class="grid-3">
+                  <label>
+                    <input type="checkbox" data-field="select_target_density" checked />
+                    Target density (g/cm3)
+                    <input type="number" step="0.001" data-field="target_density" value="0.95" />
+                  </label>
+                  <label>
+                    <input type="checkbox" data-field="select_target_heating_value" checked />
+                    Target mass heating value (MJ/kg)
+                    <input type="number" step="0.1" data-field="target_heating_value" value="42.0" />
+                  </label>
+                  <label>
+                    <input type="checkbox" data-field="select_target_melting_point" />
+                    Target melting point (K)
+                    <input type="number" step="0.1" data-field="target_melting_point" value="273.15" />
+                  </label>
+                  <label>
+                    <input type="checkbox" data-field="select_target_boiling_point" />
+                    Target boiling point (K)
+                    <input type="number" step="0.1" data-field="target_boiling_point" value="450.0" />
+                  </label>
+                  <label>
+                    <input type="checkbox" data-field="select_target_flash_point" />
+                    Target flash point (K)
+                    <input type="number" step="0.1" data-field="target_flash_point" value="310.0" />
+                  </label>
+                  <label>
+                    <input type="checkbox" data-field="select_target_volumetric_heating_value" />
+                    Target volumetric heating value (MJ/L)
+                    <input type="number" step="0.1" data-field="target_volumetric_heating_value" value="32.3" />
+                  </label>
+                </div>
+              </div>
+              <div class="objective-panel" data-objective-panel="novelty_exploration" hidden>
+                <strong>Novelty exploration</strong>
+              </div>
+            </div>
+            <label>
+              Objective scoring window (relative)
+              <input type="number" step="0.01" data-field="objective_relative_window" value="0.15" min="0.01" />
+            </label>
+          </section>
+
+          <div class="mode-section active" data-section="symmetric">
+            <h2>Symmetric Generation</h2>
+            <label class="checkline fuel-check">
+              <input type="checkbox" data-field="known_fuel_check" checked />
+              Classic fuel hit check
+            </label>
+            <label>
+              Stage-1 bond model (base graph &rarr; semi-base graph)
+              <input data-field="semi_base_checkpoint" />
+            </label>
+            <label>
+              Stage-2 bond model (semi-base graph &rarr; complete half graph)
+              <input data-field="checkpoint" />
+            </label>
+            <div class="grid-2">
+              <label>
+                Stage-1 bond threshold
+                <input type="number" step="0.01" data-field="semi_base_threshold" value="0.73" />
+              </label>
+              <label>
+                Stage-2 bond threshold
+                <input type="number" step="0.01" data-field="threshold" value="0.94" />
+              </label>
+            </div>
+            <label>
+              Total deduplication library
+              <input data-field="known_smiles" />
+            </label>
+            <label>
+              Generation-stage temp dedup library (auto: output_folder\generation_temporary_smiles.txt)
+              <input data-field="temporary_smiles" />
+            </label>
+            <div class="field">
+              <span class="field-title">Output folder</span>
+              <span class="path-row">
+                <input data-field="output_dir" />
+                <button type="button" class="browse-btn" data-browse-for="output_dir">Browse…</button>
+              </span>
+            </div>
+            <div class="grid-3">
+              <label>
+                Min carbons
+                <input type="number" data-field="carbon_min" min="1" />
+              </label>
+              <label>
+                Max carbons
+                <input type="number" data-field="carbon_max" min="1" max="17" />
+              </label>
+              <label>
+                Samples per round
+                <input type="number" data-field="samples" min="0" />
+              </label>
+            </div>
+            <div class="grid-3">
+              <label>
+                Iterations
+                <input type="number" data-field="iterations" min="1" />
+              </label>
+              <label>
+                Random seed (reproducibility)
+                <input type="number" data-field="seed" value="16" />
+              </label>
+              <label>
+                Exploration temperature
+                <input type="number" step="0.01" data-field="temperature" value="1.0" />
+              </label>
+            </div>
+            <div class="grid-3">
+              <label>
+                Top-k candidates
+                <input type="number" data-field="top_k" value="2" min="1" />
+              </label>
+              <label>
+                Feedback strength
+                <input type="number" step="0.05" data-field="feedback_strength" value="1.25" min="0" />
+              </label>
+              <label>
+                Warmup property reward weight
+                <input type="number" step="0.05" data-field="property_feedback_warmup_weight" value="0.35" min="0" max="1" />
+              </label>
+            </div>
+            <div class="grid-3">
+              <label>
+                Warmup iterations
+                <input type="number" data-field="property_feedback_warmup_iterations" value="20" min="0" />
+              </label>
+              <label>
+                Property feedback weight
+                <input type="number" step="0.05" data-field="property_feedback_weight" value="0.70" min="0" max="1" />
+              </label>
+              <label>
+                Property reward slope
+                <input type="number" step="0.1" data-field="property_reward_slope" value="2.5" min="0.1" />
+              </label>
+            </div>
+            <div class="grid-3">
+              <label>
+                Partition feedback gain
+                <input type="number" step="0.5" data-field="partition_feedback_gain" value="6.0" min="0.1" />
+              </label>
+              <label>
+                Min exploration fraction
+                <input type="number" step="0.01" data-field="feedback_exploration_fraction" value="0.12" min="0" max="0.5" />
+              </label>
+              <label>
+                Edge feedback gain
+                <input type="number" step="0.25" data-field="edge_feedback_gain" value="2.0" min="0.1" />
+              </label>
+            </div>
+            <label class="checkline">
+              <input type="checkbox" data-field="feedback_reward" checked />
+              Enable feedback reward
+            </label>
+            <label class="checkline">
+              <input type="checkbox" data-field="online_property_feedback" checked />
+              Predict properties each round and feed them back to the next round
+            </label>
+          </div>
+
+          <div class="mode-section" data-section="perturbation">
+            <h2>Perturbation</h2>
+            <label class="checkline fuel-check">
+              <input type="checkbox" data-field="known_fuel_check" checked />
+              Classic fuel hit check
+            </label>
+            <div class="field">
+              <span class="field-title">Output folder</span>
+              <span class="path-row">
+                <input data-field="output_dir" />
+                <button type="button" class="browse-btn" data-browse-for="output_dir">Browse…</button>
+              </span>
+            </div>
+            <label>
+              Finalized seed table (auto: output_folder\perturbation_seeds_T123.csv)
+              <input data-field="finalized_hits" />
+            </label>
+            <label>
+              Perturbation seed pool
+              <select data-field="seed_pool">
+                <option value="tier123" selected>
+                  Tier 1-3 pool
+                </option>
+                <option value="potential">
+                  Potential pools (Potential 1 + best 10% of 2/3)
+                </option>
+              </select>
+            </label>
+            <label>
+              Total deduplication library
+              <input data-field="known_smiles" />
+            </label>
+            <label>
+              Generation-stage temp dedup library (auto: output_folder\generation_temporary_smiles.txt)
+              <input data-field="perturbation_generation_temporary" />
+            </label>
+            <label>
+              Perturbation-stage temp dedup library (auto: output_folder\perturbation_temporary_smiles.txt)
+              <input data-field="perturbation_temporary_smiles" />
+            </label>
+            <div class="grid-3">
+              <label>
+                Attempts per group
+                <input type="number" data-field="samples" value="100" min="0" />
+              </label>
+              <label>
+                Random seed (reproducibility, same seed gives same result)
+                <input type="number" data-field="seed" value="16" />
+              </label>
+              <label>
+                Max seeds (blank = all seeds)
+                <input type="number" data-field="max_seeds" placeholder="blank = all" />
+              </label>
+            </div>
+            <label class="checkline">
+              <input type="checkbox" data-field="samples_per_seed_operation" checked />
+              Apply the attempt count to every seed x operation combination
+            </label>
+            <fieldset>
+              <legend>Perturbation operators</legend>
+              <div class="checks">
+                <label><input type="checkbox" data-operation="bond_rewire" checked /> Bond rewire</label>
+                <label><input type="checkbox" data-operation="ring_adjust" checked /> Ring adjustment</label>
+                <label><input type="checkbox" data-operation="methyl_shift" checked /> Methyl shift</label>
+                <label><input type="checkbox" data-operation="local_skeleton_rearrange" checked /> Local skeleton rearrangement</label>
+                <label><input type="checkbox" data-operation="ch2_bridge_move" checked /> CH2 bridge move</label>
+                <label><input type="checkbox" data-operation="methylation" checked /> Methylation</label>
+                <label><input type="checkbox" data-operation="ring_expand" checked /> Ring expansion</label>
+              </div>
+            </fieldset>
+            <label class="checkline">
+              <input type="checkbox" data-field="skip_mmff_geometry" />
+              Skip MMFF geometry pre-screening
+            </label>
+            <label class="checkline">
+              <input type="checkbox" data-field="merge_existing_products" checked />
+              Add to the products already in the output folder
+            </label>
+            <fieldset class="mode-choice">
+              <legend>Perturbation mode</legend>
+              <div class="checks">
+                <label>
+                  <input type="radio" name="perturbation_mode"
+                         data-perturbation-mode="full" checked />
+                  Full campaign: every Tier 1-3 seed, 10 attempts per operator
+                </label>
+                <label>
+                  <input type="radio" name="perturbation_mode"
+                         data-perturbation-mode="iterative" />
+                  Iterative: rolling queue, using the settings below
+                </label>
+              </div>
+            </fieldset>
+            <div id="iterative-only" hidden>
+            <div class="grid-3">
+              <label>
+                Iteration rounds
+                <input type="number" data-field="iterations" value="3" min="1" />
+              </label>
+              <label>
+                Products screened per round
+                <input type="number" data-field="per_round_budget" value="2000" min="1" />
+              </label>
+              <label>
+                Leads perturbed per round
+                <input type="number" data-field="max_seeds_per_round" value="300" min="1" />
+              </label>
+            </div>
+            <div class="grid-3">
+              <label>
+                Total perturbations per lead and round
+                <input
+                  type="number"
+                  data-field="attempts_per_molecule"
+                  value="3"
+                  min="0"
+                />
+              </label>
+              <label>
+                Stop after N rounds without a new Tier 1 (0 = never)
+                <input
+                  type="number"
+                  data-field="rounds_without_improvement"
+                  value="0"
+                  min="0"
+                />
+              </label>
+              <label>
+                Iteration model (blank: train from this run folder)
+                <input data-field="iteration_model" placeholder="auto" />
+              </label>
+            </div>
+            <div class="grid-3">
+              <label>
+                Operator split (optional, name=count; blank = current iteration
+                model weights)
+                <input
+                  data-field="operator_attempts"
+                  placeholder="ch2_bridge_move=4,ring_expand=4,methyl_shift=2"
+                />
+              </label>
+              <label>
+                How strongly each round may shift the split (0 = fixed)
+                <input
+                  type="number"
+                  step="0.1"
+                  data-field="operator_adaptation_rate"
+                  value="0.5"
+                  min="0"
+                  max="1"
+                />
+              </label>
+            </div>
+            </div>
+            <label class="checkline">
+              <input type="checkbox" data-field="use_heating_value" />
+              Use existing mass heating value results in classification
+            </label>
+          </div>
+
+          <div class="mode-section" data-section="rescore">
+            <h2>Rescore</h2>
+            <label>
+              Input results table
+              <input data-field="input" />
+            </label>
+            <label>
+              Output results table
+              <input data-field="output" />
+            </label>
+            <label>
+              Summary output
+              <input data-field="summary_output" />
+            </label>
+          </div>
+
+          <section class="subsection">
+            <h2>Property Thresholds</h2>
+            <div class="grid-3">
+              <label>
+                Min density (g/cm3, higher is better)
+                <input type="number" step="0.001" data-field="density_min" value="0.85" />
+              </label>
+              <label>
+                Min mass heating value (MJ/kg, higher is better)
+                <input type="number" step="0.1" data-field="heating_value_min" value="38.0" />
+              </label>
+              <label>
+                Max melting point (K, lower is better)
+                <input type="number" step="0.1" data-field="melting_point_max" value="273.15" />
+              </label>
+              <label>
+                Min boiling point (K, higher is better)
+                <input type="number" step="0.1" data-field="boiling_point_min" value="450.0" />
+              </label>
+              <label>
+                Min flash point (K, higher is better)
+                <input type="number" step="0.1" data-field="flash_point_min" value="310.0" />
+              </label>
+              <label>
+                Min volumetric heating value (MJ/L, higher is better)
+                <input type="number" step="0.1" data-field="volumetric_heating_value_min" value="32.3" />
+              </label>
+            </div>
+            <label class="checkline">
+              <input type="checkbox" data-field="use_density_screen" checked />
+              Density participates in screening and scoring
+            </label>
+            <label class="checkline">
+              <input type="checkbox" data-field="use_heating_value_screen" checked />
+              Mass heating value participates in screening and scoring
+            </label>
+            <label class="checkline">
+              <input type="checkbox" data-field="use_melting_point_screen" checked />
+              Melting point participates in screening and scoring
+            </label>
+            <label class="checkline">
+              <input type="checkbox" data-field="use_boiling_point_screen" />
+              Boiling point participates in screening and scoring
+            </label>
+            <label class="checkline">
+              <input type="checkbox" data-field="use_flash_point_screen" />
+              Flash point participates in screening and scoring
+            </label>
+            <label class="checkline">
+              <input type="checkbox" data-field="use_volumetric_heating_value_screen" />
+              Enable volumetric heating value mode
+            </label>
+            <div class="grid-3">
+              <label>
+                Novelty threshold (0-1, higher is more novel)
+                <input type="number" step="0.01" data-field="novelty_threshold" value="0.75" />
+              </label>
+              <label>
+                Uncertainty scale (threshold looseness)
+                <input type="number" step="0.1" data-field="uncertainty_scale" value="1.0" />
+              </label>
+              <label>
+                Max ring count (structural complexity cap)
+                <input type="number" data-field="max_ring_count" value="6" />
+              </label>
+              <label>
+                SA cap (lower is easier to synthesize)
+      <input type="number" step="0.1" data-field="max_sa_score" value="4.5" />
+    </label>
+    <label>
+      Screening workers (0 = auto, 1 = serial)
+      <input type="number" step="1" data-field="screen_workers" value="1" />
+    </label>
+    <label>
+      Property workers (0 = auto, 1 = serial)
+      <input type="number" step="1" data-field="property_workers" value="1" />
+    </label>
+    <label>
+      Reproducibility scope (all | tier12 | tier123)
+      <input type="text" data-field="reproducibility_scope" value="tier12" />
+    </label>
+              <label>
+                Missing property penalty (per missing property)
+                <input type="number" step="0.01" min="0" max="1" data-field="missing_property_penalty" value="0.15" />
+              </label>
+            </div>
+          </section>
+
+          <section class="subsection">
+            <h2>Composite Score Weights</h2>
+            <div class="grid-5 weights" data-weight-group="composite">
+              <label>Property composite<input type="number" min="0" max="1" step="0.01" data-field="property_score_weight" value="0.65" /></label>
+              <label>e3nn geometry<input type="number" min="0" max="1" step="0.01" data-field="e3nn_geometry_score_weight" value="0.10" /></label>
+              <label>e3nn symmetry<input type="number" min="0" max="1" step="0.01" data-field="e3nn_symmetry_score_weight" value="0.10" /></label>
+              <label>Novelty<input type="number" min="0" max="1" step="0.01" data-field="novelty_score_weight" value="0.15" /></label>
+            </div>
+            <div id="weightNotice" class="notice ok">Current weight total: 1.00</div>
+          </section>
+
+          <section class="subsection">
+            <h2>Property Score Internal Weights</h2>
+            <div class="grid-3">
+              <label>Density weight<input type="number" step="0.1" data-field="density_score_weight" value="1.0" /></label>
+              <label>Mass heating value weight<input type="number" step="0.1" data-field="heating_value_score_weight" value="1.0" /></label>
+              <label>Volumetric heating value weight<input type="number" step="0.1" data-field="volumetric_heating_value_score_weight" value="0.0" /></label>
+              <label>Melting point weight<input type="number" step="0.1" data-field="melting_point_score_weight" value="1.0" /></label>
+              <label>Boiling point weight<input type="number" step="0.1" data-field="boiling_point_score_weight" value="1.0" /></label>
+              <label>Flash point weight<input type="number" step="0.1" data-field="flash_point_score_weight" value="1.0" /></label>
+              <label>SA weight<input type="number" step="0.1" data-field="property_sa_score_weight" value="1.0" /></label>
+              <label>Structure validity weight<input type="number" step="0.1" data-field="structure_validity_score_weight" value="1.0" /></label>
+            </div>
+          </section>
+
+          <section class="subsection">
+            <h2>Model Paths</h2>
+            <label>
+              Density prediction method
+              <select data-field="density_model">
+                <option value="sta_density" selected>
+                  STA density model (default)
+                </option>
+                <option value="none">
+                  Do not predict density
+                </option>
+              </select>
+            </label>
+            <label>
+              Mass heating value prediction method
+              <select data-field="heating_model">
+                <option value="sta_heating" selected>
+                  STA formation-enthalpy derived (default)
+                </option>
+                <option value="none">
+                  Do not predict mass heating value
+                </option>
+              </select>
+            </label>
+            <label>
+              Melting/boiling/flash fusion head version
+              <select data-field="phase_fusion_schema_version">
+                <option value="schema2_mlp" selected>
+                  2D MLP ensemble (default)
+                </option>
+                <option value="schema3_mlp">
+                  3D MLP ensemble (optional)
+                </option>
+              </select>
+            </label>
+            <label>
+              Melting point prediction method
+              <select data-field="melting_model">
+                <option value="phase_fusion_melting" selected>
+                  MLP fusion head (default)
+                </option>
+                <option value="sta_melting">
+                  STA melting-point model
+                </option>
+                <option value="none">
+                  Do not predict melting point
+                </option>
+              </select>
+            </label>
+            <div class="grid-3">
+              <label>
+                Boiling point prediction method
+                <select data-field="boiling_point_model">
+                  <option value="phase_fusion_boiling" selected>MLP fusion head (default)</option>
+                  <option value="sta_boiling">STA boiling point: predict K</option>
+                  <option value="none">Do not predict boiling point</option>
+                </select>
+              </label>
+              <label>
+                Flash point prediction method
+                <select data-field="flash_point_model">
+                  <option value="phase_fusion_flash" selected>MLP fusion head (default)</option>
+                  <option value="sta_flash">STA flash point: predict K</option>
+                  <option value="none">Do not predict flash point</option>
+                </select>
+              </label>
+              <label>
+                Formation enthalpy prediction method
+                <select data-field="formation_enthalpy_model">
+                  <option value="sta_formation" selected>STA formation enthalpy (default)</option>
+                  <option value="none">Do not predict formation enthalpy</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              ISP prediction method
+              <select data-field="isp_model">
+                <option value="none" selected>Do not predict ISP (default)</option>
+                <option value="sta_isp">STA ISP</option>
+              </select>
+            </label>
+            <label>
+              3D symmetry scoring method
+              <select data-field="geometry_model">
+                <option value="e3nn_geometry" selected>
+                  e3nn 3D geometry/symmetry scorer
+                </option>
+                <option value="rule_geometry">
+                  Rule-based geometry scoring
+                </option>
+              </select>
+            </label>
+          </section>
+        </form>
+      </section>
+
+      <section class="panel runspace">
+        <div class="command-head">
+          <h2>Run Command</h2>
+          <div class="actions">
+            <button id="copyCommand" type="button">Copy Command</button>
+            <button id="runButton" type="button" class="primary">Start Run</button>
+            <button id="resumeButton" type="button" hidden>Resume Incomplete Job</button>
+            <button id="stopButton" type="button" hidden>Stop Run</button>
+          </div>
+        </div>
+        <textarea id="commandPreview" spellcheck="false"></textarea>
+
+        <section class="monitor">
+          <h2>Run Stages</h2>
+          <div id="stageList" class="stages"></div>
+          <div id="jobMeta" class="meta-line">No running job yet</div>
+        </section>
+
+        <section class="monitor">
+          <h2>Log</h2>
+          <pre id="logBox"></pre>
+        </section>
+
+        <section class="monitor">
+          <h2>Result Files</h2>
+          <div id="fileList" class="file-list"></div>
+        </section>
+
+        <section class="monitor">
+          <h2>Result Preview</h2>
+          <div id="preview" class="preview">Select a result file to view.</div>
+        </section>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
