@@ -1,11 +1,9 @@
-﻿> **Code-only repository.** The trained model checkpoints, the datasets and the production result tables are distributed as release assets (see *Releases*) or in the Zenodo archive, not in this git repository.
+> **Code-only repository.** The trained model checkpoints, the datasets and the production result tables are distributed as release assets (see *Releases*) or in the Zenodo archive, not in this git repository.
 
 > How to run: enter the package root (`SCULPTOR_v1.0.0`), run
 > `powershell -ExecutionPolicy Bypass -File .\setup_env.ps1`, then invoke the
 > CLI with `.\.venv\Scripts\python.exe -m fuel_design.cli ...`.
-> This distribution is self-contained: it includes the runtime code, all trained
-> models, the datasets under `dataset/`, the total reference library and the
-> production result tables under `result/prod_full_2026_10_02/`.
+> The full distribution is assembled from this repository plus the release assets (models and data); `setup_env.ps1` rebuilds the Python environment.
 
 # Symmetric Fuel Design
 
@@ -548,14 +546,9 @@ python -m fuel_design.cli predict-cbh-bdc-formation --smiles C1CCCCC1
 
 ## Package manifest and integrity
 
-`manifest.json` lists every file in this package except `manifest.json` itself
-and `SHA256SUMS`; the ZIP therefore contains two more entries than the manifest
-file count. `SHA256SUMS` has one SHA-256 line per listed file. After extraction
-or copying, run:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\verify_sha256.ps1
-```
+`manifest.json` lists every file in the full distribution. The integrity of the
+model and data archives is given by the SHA-256 values listed in the release
+notes.
 
 
 ## Generation schedule
